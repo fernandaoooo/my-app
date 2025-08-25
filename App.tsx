@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>IFRO 2025a</Text>
+      <Text>IFRO 2025 - 3°A Informática</Text>
       <StatusBar style="auto" />
     </View>
   );
