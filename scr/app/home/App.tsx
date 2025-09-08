@@ -5,7 +5,7 @@ import {Event} from "../../components/Event"
 export default function App() {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Grocery List</Text>
+            <Text style={styles.text}>Groceryy List</Text>
             <Input placeH='Type the product'/>
             <View style={styles.area}>
             <ScrollView>
