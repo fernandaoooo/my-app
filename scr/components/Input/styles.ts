@@ -7,10 +7,12 @@ export default StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: "black",
-    color: "white",
+    color: "purple",
+    backgroundColor :"white",
     borderRadius: 8,
     paddingHorizontal: 10,
+    height: 60,
+    width: "70%"
   },
   button: {
     backgroundColor: "black",

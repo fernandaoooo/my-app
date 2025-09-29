@@ -10,12 +10,14 @@ export default function App() {
   const addItem = (item: string) => {
     setItems((prev) => [...prev, item]);
   };
-
+  const removeItem = (index: number) => {
+    setItems((prev) => prev.filter((_, i) => i !== index));
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Grocery List</Text>
       <InputProduct onAdd={addItem} />
-      <ShoppingList items={items} />
+      <ShoppingList items={items} onRemove={removeItem} />
     </View>
   );
 }

@@ -1,31 +1,24 @@
 import React, { useState } from "react";
-import { View, TextInput, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, TextInput, Button } from "react-native";
 import styles from "./styles";
 
 export default function InputProduct({ onAdd }) {
   const [text, setText] = useState("");
 
+  const handleAdd = () => {
+    onAdd(text);
+    setText("");
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={styles.inputContainer}>
       <TextInput
         style={styles.input}
-        placeholder="Digite o Produto"
-        placeholderTextColor="#ccc"
+        placeholder="Digite um item"
         value={text}
         onChangeText={setText}
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          if (text.trim()) {
-            onAdd(text);
-            setText("");
-          }
-        }}
-      >
-        <Ionicons name="add" size={24} color="white" />
-      </TouchableOpacity>
+      <Button title="Adicionar" onPress={handleAdd} />
     </View>
   );
 }
