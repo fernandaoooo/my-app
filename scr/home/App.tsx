@@ -1,23 +1,165 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
-import InputProduct from "../components/Input/input.js"
-import ShoppingList from "../components/Lista/listaDeCompras.js";
-import styles from "./styles";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+
+interface Item {
+  id: string;
+  nome: string;
+}
 
 export default function App() {
-  const [items, setItems] = useState<string[]>(["Apple", "Banana", "Watermelon"]);
+  const [item, setItem] = useState<string>("");
+  const [lista, setLista] = useState<Item[]>([]);
+  const[nome, setNome] = useState<string>("");
+  const[tipo, setTipo] = useState<string>("");
+  const[largura, setLargura] = useState<number>();
+  const[comprimento, setComprimento] = useState<number>();
+  const[media, setMedia] = useState<number>();
 
-  const addItem = (item: string) => {
-    setItems((prev) => [...prev, item]);
+  const adicionarItem = () => {
+    if (item.trim() === "") return;
+    setLista([...lista, { id: Date.now().toString(), nome: item }]);
+    setItem("");
   };
-  const removeItem = (index: number) => {
-    setItems((prev) => prev.filter((_, i) => i !== index));
-  };
+  function handleClick() {
+    console.log("Calculo");
+    setNome(nome);
+    setTipo(tipo);
+    setLargura(largura);
+    setComprimento(comprimento);
+    setMedia(comprimento*largura);
+    
+}
+
+  const renderItem = ({ item, index }: { item: Item; index: number }) => (
+    <View
+      style={[
+        styles.item,
+        index !== lista.length - 1 && styles.itemLinha,
+      ]}
+    >
+      <AntDesign name="checkcircle" size={20} color="#004d40" />
+      <Text style={styles.texto}>{item.nome}</Text>
+
+      {}
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Grocery List</Text>
-      <InputProduct onAdd={addItem} />
-      <ShoppingList items={items} onRemove={removeItem} />
+      <Text style={styles.titulo}>Cadastro de Imóvel</Text>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Nome do proprietário"
+          placeholderTextColor="black"
+          value={nome}
+          onChangeText={setNome}
+        />
+        </View>
+        <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Tipo de imóvel"
+          placeholderTextColor="black"
+          value={tipo}
+          onChangeText={setTipo}
+        />
+        </View>
+        <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Largura do terreno"
+          placeholderTextColor="black"
+          value={largura}
+          onChangeText={setLargura}
+        />
+        </View>
+        <View style={styles.inputContainer}>
+        <TextInput
+        style={styles.input}
+        placeholder="Comprimento do terreno"
+        placeholderTextColor="black"
+        value={comprimento}
+        onChangeText={setComprimento}
+      />
+      </View>
+        <Button onPress={handleClick} title='Calcular tamanho'/>
+        <View style={styles.container}>
+        <Text>Nome do proprietário: {nome}</Text>
+        <Text>Tipo do imóvel: {tipo}</Text>
+        <Text>Tamanho do terreno: {largura*comprimento} metros quadrados</Text>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 20,
+    paddingTop: 50,
+  },
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "black",
+    textAlign: "center",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  input: {
+    flex: 1,
+    backgroundColor: "lightgray",
+    color: "black",
+    paddingHorizontal: 10,
+    height: 50,
+    borderRadius: 5,
+    fontSize: 17
+  },
+  listaContainer: {
+    borderColor: "#004d40",
+    borderWidth: 2,
+    borderRadius: 10,
+    padding: 10,
+    flex: 1,
+    backgroundColor: "lightgreen",
+  },
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 5,
+  },
+  itemLinha: {
+    borderBottomWidth: 1,
+    borderColor: "#004d40",
+  },
+  texto: {
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 18,
+    color: "#004d40",
+    fontWeight: "500",
+  },
+  botaoExcluir: {
+    marginLeft: 10,
+    padding: 5,
+  },
+});
