@@ -16,43 +16,19 @@ interface Item {
 }
 
 export default function App() {
-  const [item, setItem] = useState<string>("");
-  const [lista, setLista] = useState<Item[]>([]);
   const[nome, setNome] = useState<string>("");
   const[tipo, setTipo] = useState<string>("");
   const[largura, setLargura] = useState<number>();
   const[comprimento, setComprimento] = useState<number>();
-  const[media, setMedia] = useState<number>();
 
-  const adicionarItem = () => {
-    if (item.trim() === "") return;
-    setLista([...lista, { id: Date.now().toString(), nome: item }]);
-    setItem("");
-  };
   function handleClick() {
     console.log("Calculo");
     setNome(nome);
     setTipo(tipo);
     setLargura(largura);
     setComprimento(comprimento);
-    setMedia(comprimento*largura);
     
 }
-
-  const renderItem = ({ item, index }: { item: Item; index: number }) => (
-    <View
-      style={[
-        styles.item,
-        index !== lista.length - 1 && styles.itemLinha,
-      ]}
-    >
-      <AntDesign name="checkcircle" size={20} color="#004d40" />
-      <Text style={styles.texto}>{item.nome}</Text>
-
-      {}
-    </View>
-  );
-
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Cadastro de Imóvel</Text>
@@ -111,7 +87,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   titulo: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
     color: "black",
@@ -139,27 +115,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "lightgreen",
   },
-  item: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    padding: 10,
-    borderRadius: 5,
-  },
-  itemLinha: {
-    borderBottomWidth: 1,
-    borderColor: "#004d40",
-  },
-  texto: {
-    flex: 1,
-    marginLeft: 10,
-    fontSize: 18,
-    color: "#004d40",
-    fontWeight: "500",
-  },
-  botaoExcluir: {
-    marginLeft: 10,
-    padding: 5,
-  },
+
 });
