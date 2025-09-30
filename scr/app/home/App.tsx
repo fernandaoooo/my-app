@@ -27,20 +27,3 @@ export default function App(){
     );
 }
 
-// export default function App() {
-//     return (
-//         <View style={styles.container}>
-//             <Text style={styles.text}>Nome Evento</Text>
-//             <View style={styles.form}>
-//             <TextInput style={styles.input} placeholder='Digite o evento' placeholderTextColor={'#fff'}></TextInput>
-//             <TouchableOpacity  style={styles.button} onPress={()=>{Alert.alert("Teste Botão")}}>
-//                 <Text style={styles.buttonText}>+</Text>
-//             </TouchableOpacity>
-//             </View>
-//             <Event name="Evento novo"/>
-//             <Event name="Evento cancelado"/>
-
-//         </View>
-        
-//     )
-// }
