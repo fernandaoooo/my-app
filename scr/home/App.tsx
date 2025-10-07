@@ -18,26 +18,24 @@ interface Item {
 export default function App() {
   const[nome, setNome] = useState<string>("");
   const[tipo, setTipo] = useState<string>("");
-  const[largura, setLargura] = useState<number>();
-  const[comprimento, setComprimento] = useState<number>();
+  const [lista, setLista] = useState<Item[]>([]);
+
 
   function handleClick() {
     console.log("Calculo");
     setNome(nome);
     setTipo(tipo);
-    setLargura(largura);
-    setComprimento(comprimento);
-    
+
 }
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Cadastro de Imóvel</Text>
+      <Text style={styles.titulo}>Calorias</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Nome do proprietário"
-          placeholderTextColor="black"
+          placeholder="Digite o alimento"
+          placeholderTextColor="grey"
           value={nome}
           onChangeText={setNome}
         />
@@ -45,35 +43,16 @@ export default function App() {
         <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Tipo de imóvel"
-          placeholderTextColor="black"
+          placeholder="Digite as calorias"
+          placeholderTextColor="grey"
           value={tipo}
           onChangeText={setTipo}
         />
-        </View>
-        <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Largura do terreno"
-          placeholderTextColor="black"
-          value={largura}
-          onChangeText={setLargura}
-        />
-        </View>
-        <View style={styles.inputContainer}>
-        <TextInput
-        style={styles.input}
-        placeholder="Comprimento do terreno"
-        placeholderTextColor="black"
-        value={comprimento}
-        onChangeText={setComprimento}
-      />
       </View>
-        <Button onPress={handleClick} title='Calcular tamanho'/>
+        <Button onPress={handleClick} title='Adicionar' color="darkblue"/>
         <View style={styles.container}>
-        <Text>Nome do proprietário: {nome}</Text>
-        <Text>Tipo do imóvel: {tipo}</Text>
-        <Text>Tamanho do terreno: {largura*comprimento} metros quadrados</Text>
+        <Text>Item: {nome}</Text>
+        <Text>Calorias: {tipo}</Text>
       </View>
     </View>
   );
@@ -82,7 +61,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "lightgrey",
     padding: 20,
     paddingTop: 50,
   },
@@ -90,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
-    color: "black",
+    color: "darkblue",
     textAlign: "center",
   },
   inputContainer: {
@@ -100,7 +79,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: "lightgray",
+    backgroundColor: "white",
     color: "black",
     paddingHorizontal: 10,
     height: 50,
